@@ -1,0 +1,58 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!-- This file shows how to design a first-run page that provides a welcome screen to the user about the features of the add-in. -->
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome to Multivers</title>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous">
+        <!-- Office JavaScript API -->
+        <script type="text/javascript"
+            src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+        <link rel="stylesheet"
+            href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css" />
+
+        <!-- Template styles -->
+        <link href="taskpane.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body class="ms-font-m ms-welcome ms-Fabric">
+        <header class="ms-welcome__header ms-bgColor-neutralLighter">
+            <img width="90" height="90" src="../../assets/logo-filled.png"
+                alt="Contoso" title="Contoso" />
+            <h2 class="ms-font-su">Welcome to Multivers</h2>
+            <p>A smart version management platform.</p>
+        </header>
+        <section id="sideload-msg" class="ms-welcome__main">
+            <h2 class="ms-font-xl">Please <a target="_blank"
+                    href="https://learn.microsoft.com/office/dev/add-ins/testing/test-debug-office-add-ins#sideload-an-office-add-in-for-testing">sideload</a>
+                your add-in to see app body.</h2>
+        </section>
+        <main id="app-body" class="ms-welcome__main" style="display: none;">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a id="show_file_metadata_button" class= "nav-link active" aria-current="page"
+                        href="#">Document Detail</a>
+                </li>
+                <li class="nav-item">
+                    <a id="show_web_view_button" class="nav-link" href="#">Web</a>
+                </li>
+            </ul>
+            <div id="main_content">
+                
+            </div>
+        </main>
+    </body>
+
+</html>
