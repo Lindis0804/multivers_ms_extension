@@ -1,11 +1,11 @@
-import * as bootstrap from "bootstrap";
-import axios from "axios";
 /*
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
  * See LICENSE in the project root for license information.
  */
 
-/* global console, document, Excel, Office */
+/* global document, Office, Word */
+import * as bootstrap from "bootstrap";
+import axios from "axios";
 
 export function openInBrowser(event: Event) {
   event.preventDefault();
@@ -55,24 +55,28 @@ const notifyNewVersion = async ({ documentId, versionName }: { documentId: numbe
 
         document.getElementById("download-link").onclick = openInBrowser;
       }
+
+      showToast();
     } catch (err) {
       document.getElementById("toast-body").innerHTML = `Error in get version: ${err}`;
-    }
 
-    showToast();
+      showToast();
+    }
 
     await sleep(120000);
   }
 };
 
-Office.onReady(async () => {
-  document.getElementById("sideload-msg").style.display = "none";
-  document.getElementById("app-body").style.display = "flex";
+Office.onReady((info) => {
+  if (info.host === Office.HostType.Word) {
+    document.getElementById("sideload-msg").style.display = "none";
+    document.getElementById("app-body").style.display = "flex";
 
-  document.getElementById("show_file_metadata_button").onclick = showFileMetadataPage;
-  document.getElementById("show_web_view_button").onclick = showWebViewPage;
+    document.getElementById("show_file_metadata_button").onclick = showFileMetadataPage;
+    document.getElementById("show_web_view_button").onclick = showWebViewPage;
 
-  showFileMetadataPage();
+    showFileMetadataPage();
+  }
 });
 
 export class fileMetadata {
@@ -115,8 +119,8 @@ export function getFileMetadataTable(params: Object): string {
 export async function showFileMetadataPage() {
   // showNotification();
 
-  await Excel.run(async (context) => {
-    const metadata = context.workbook.properties;
+  await Word.run(async (context) => {
+    const metadata = context.document.properties;
     metadata.load(["title", "comments", "author", "subject", "lastAuthor", "creationDate", "keywords"]);
     let other: {
       version?: string;

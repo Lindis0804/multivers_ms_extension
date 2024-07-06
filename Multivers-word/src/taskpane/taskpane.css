@@ -143,3 +143,8 @@ iframe {
   cursor: pointer;
 }
 
+.toast-header-background{
+    background-color: green;
+    color: wheat;
+}
+
